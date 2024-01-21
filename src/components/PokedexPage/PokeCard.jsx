@@ -1,12 +1,13 @@
 import { useEffect } from "react"
 import useFecth from "../../hooks/useFecth"
 import { useNavigate } from "react-router-dom"
+import './styles/PokeCard.css'
 
 const PokeCard = ({ url }) => {
-    const [pokemon, getPokemons] = useFecth(url)
+    const [pokemon, getPokemon] = useFecth(url)
 
     useEffect(() => {
-        getPokemons()
+        getPokemon()
     }, [])
 
     const navigate = useNavigate()
@@ -15,32 +16,31 @@ const PokeCard = ({ url }) => {
     }
 
     return (
-        <div onClick={handleNavigatePokemon}>
-            <article>
-                <header>
-                    <img src={pokemon?.sprites.other["official-artwork"].front_default} alt="Pokemon" />
+        <div className={`pokecard_border ${pokemon?.types[0].type.name}`} onClick={handleNavigatePokemon}>
+            <article className="pokecard">
+                <header className="pokecard_header">
+                    <img className="pokecard_img" src={pokemon?.sprites.other["official-artwork"].front_default} alt="Pokemon" />
                 </header>
-                <section>
-                    <h3>{pokemon?.name}</h3>
-                </section>
-                <ul>
-                    {
-                        pokemon?.types.map((typeInfo) => (
-                            <li key={typeInfo.type.url}>{typeInfo.type.name}</li>
-                        ))
-                    }
-                </ul>
-                <hr />
-                <ul>
-                    {
-                        pokemon?.stats.map(statInfo => (
-                            <li key={statInfo.stat.url}>
-                                <span>{statInfo.stat.name}</span>
-                                <span>{statInfo.base_stat}</span>
+                <section className="pokecard_body">
+                    <h3 className="pokecard_name">{pokemon?.name}</h3>
+                    <ul className="pokecard_types">
+                         {pokemon?.types.map((typeInfo) => (
+                         <li className="pokecard_types_item" key={typeInfo.type.url}>{typeInfo.type.name}</li>
+                         ))}
+                        
+                    </ul>
+                    <hr className="pokecard_hr"/>
+                    <ul className="pokecard_stats">
+                        {
+                         pokemon?.stats.map(statInfo => (
+                            <li className="pokecard_stats_item" key={statInfo.stat.url}>
+                                <span className="pokecard_stats_label">{statInfo.stat.name}</span>
+                                <span className="pokecard_stats_value">{statInfo.base_stat}</span>
                             </li>
-                        ))
-                    }
-                </ul>
+                         ))
+                        }
+                    </ul>
+                </section>
             </article>
         </div>
     )

@@ -4,18 +4,12 @@ import { useState } from "react"
 const useFecth = url => {
 
     const [response, setResponse] = useState()
-    const [hasError, setHasError] = useState(false)
+    
 
     const getApi = () => {
         axios.get(url)
-        .then(res => {
-            setResponse(res.data)
-            setHasError(false)    
-        })
-        .catch(err => {
-            console.log(err)
-            setHasError(true)   
-        })
+        .then(res => setResponse(res.data))
+        .catch(err => console.log(err))
     }
 
     const getTypePokemon = (urlType) => {
@@ -29,7 +23,7 @@ const useFecth = url => {
         .catch(err => console.log(err))
     }
  
-    return [ response, getApi, getTypePokemon, hasError ]
+    return [ response, getApi, getTypePokemon ]
 }
 
 export default useFecth
