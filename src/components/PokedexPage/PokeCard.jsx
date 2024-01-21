@@ -34,7 +34,10 @@ const PokeCard = ({ url }) => {
                 <ul>
                     {
                         pokemon?.stats.map(statInfo => (
-                            <li key={statInfo.stat.url}><span>{statInfo.stat.name}</span><span>{statInfo.base_stat}</span></li>
+                            <li key={statInfo.stat.url}>
+                                <span>{statInfo.stat.name}</span>
+                                <span>{statInfo.base_stat}</span>
+                            </li>
                         ))
                     }
                 </ul>

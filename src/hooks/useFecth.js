@@ -18,7 +18,18 @@ const useFecth = url => {
         })
     }
 
-    return [ response, getApi, hasError ]
+    const getTypePokemon = (urlType) => {
+        axios.get(urlType)
+        .then(res => { 
+            const obj = {
+                results: res.data.pokemon.map(pokeInfo => pokeInfo.pokemon)
+            }
+            setResponse(obj)
+        })
+        .catch(err => console.log(err))
+    }
+ 
+    return [ response, getApi, getTypePokemon, hasError ]
 }
 
 export default useFecth
