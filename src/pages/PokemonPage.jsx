@@ -1,24 +1,45 @@
-import { useEffect } from "react"
-import useFecth from "../hooks/useFecth"
 import { useParams } from "react-router-dom"
+import useFecth from "../hooks/useFecth"
+import { useEffect } from "react"
+import "../styles/PokemonPage.css"
 
 const PokemonPage = () => {
 
-  const { id } = useParams()
+    const { id } = useParams()
 
-  const url = `https://pokeapi.co/api/v2/pokemon/${id}`
-  const { pokemon, getPokemon } = useFecth(url)
+    const url = `https://pokeapi.co/api/v2/pokemon/${id}`
+    const [ pokemon, getPokemon ] = useFecth(url)
 
-  useEffect(() => {
-    getPokemon()
-  }, [])
-
-  console.log(pokemon)
-
+    useEffect(() => {
+      getPokemon()
+    }, [])
+    
   return (
-    <div>
-      <img src={pokemon?.sprites.other["official-artwork"].front_default} alt="pokemon img" />
-      <h2>{pokemon?.name}</h2>
+    <div className="margin">
+      <article className="pokecard margin">
+        <header className="pokecard_header">
+          <img className="pokecard_img" src={pokemon?.sprites.other["official-artwork"].front_default} alt="Pokemon" />
+        </header>
+        <section className="pokecard_bod">
+          <h3 className="pokecard_name">{pokemon?.name}</h3>
+          <ul className="pokecard_types">
+            {pokemon?.types.map((typeInfo) => (
+            <li className="pokecard_types_item" key={typeInfo.type.url}>{typeInfo.type.name}</li>
+            ))}  
+          </ul>
+          <hr className="pokecard_hr"/>
+          <ul className="pokecard_stats">
+            {
+             pokemon?.stats.map(statInfo => (
+              <li className="pokecard_stats_item" key={statInfo.stat.url}>
+                <span className="pokecard_stats_label">{statInfo.stat.name}</span>
+                <span className="pokecard_stats_value">{statInfo.base_stat}</span>
+              </li>
+             ))
+            }
+          </ul>
+        </section>
+      </article>
     </div>
   )
 }
