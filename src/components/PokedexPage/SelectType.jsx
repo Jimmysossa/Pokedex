@@ -17,7 +17,7 @@ const SelectType = ({ setTypeSelected }) => {
     }
 
   return (
-    <select ref={typeRef} onChange={handleChange}>
+    <select className="select_type_pokemon" ref={typeRef} onChange={handleChange}>
         <option value={'allpokemons'}>All Pokemons</option>
         {
             types?.results.map(type => (

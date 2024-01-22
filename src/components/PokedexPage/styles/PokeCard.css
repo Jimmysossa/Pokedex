@@ -1,14 +1,9 @@
-.grass {
-    --border-gradient: #416460;
-    --linear-gradient: linear-gradient(178.92deg, #7EC6C5 0.92%, #ABDAC6 47.96%, #CAE099 99.08%);
-}
-
 .pokecard_border {
     padding: 0.7em;
-    background-color: var(--color);
     border-radius: 0.8em;
     width: 100%;
     max-width: 340px;
+    background-color: rgb(146, 255, 146);
 }
 .pokecard {
     background-color: white;
@@ -18,7 +13,7 @@
 .pokecard_header {
     aspect-ratio: 2;
     position: relative;
-    background-color: var(--linear-gradient);
+    background-color: #aaa6;
 }
 .pokecard_img {
     width: 60%;
@@ -35,6 +30,7 @@
     text-transform: capitalize;
     font-weight: 500;
     font-size: 1.4rem;
+    color: black;
 }
 .pokecard_types {
     display: flex;
